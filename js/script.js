@@ -1,5 +1,5 @@
 /**********************************************
-100DaysOfCode-Challenge: Day 45
+100DaysOfCode-Challenge: Day 46
 Project 2 - Data Pagination and Filtering - WIP
 **********************************************/
 
@@ -11,8 +11,8 @@ Step 1: Display a page
 function showPage(list, page) {
   const startIndex = page * 9 - 9
   const endIndex = page * 9 - 1
-  let ul = document.querySelector('.student-list');
-  ul.innerHTML = '';
+  let studentList = document.querySelector('.student-list');
+  studentList.innerHTML = '';
 
   for (let i = 0; i < list.length; i++) {
     if (i >= startIndex && i <= endIndex) {
@@ -29,7 +29,7 @@ function showPage(list, page) {
             <span class="date">Joined ${list[i].registered.date}</span>
           </div>
         `
-      ul.appendChild(li);
+      studentList.appendChild(li);
       li.className = "student-item cf";
     }
   }
@@ -43,22 +43,44 @@ Step 2: Display pagination buttons
 function addPagination(list) {
   //A variable to store the value of the number of pagination buttons needed if we want to display 9 students on a page
   const numPaginationButtons = Math.ceil(list.length / 9);
-  let ul = document.querySelector('.link-list');
+  let linkList = document.querySelector('.link-list');
   //remove any pagination buttons that might have previously been displayed
-  ul.innerHTML = '';
+  linkList.innerHTML = '';
 
+  //Looping over the variable for the number of pages
   for (let i = 0; i < numPaginationButtons; i++) {
 
     //adding an li element
     let li = document.createElement('li');
     li.innerHTML =
       `<button type="button">${i+1}</button>`
-    ul.appendChild(li);
-
-    // if (i = 0) {
-    //   li.className = "active";
-    // }
+    linkList.appendChild(li);
   }
+
+  // Setting up the first button as active
+  let liFirstChild = document.querySelector('.link-list li:first-child button');
+  liFirstChild.className = "active";
+
+
+  //Creating an event listener to listen for clicks on the pagination buttons
+  //check every single line below
+  linkList.addEventListener('click', e => { //verified
+
+    /* Variable to store NodeList of DOM buttons*/
+    const buttons = document.getElementsByTagName('button');
+
+    if (e.target.tagName == 'BUTTON') {
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("active");
+      }
+      e.target.classList.add('active');
+    }
+
+    //const textCont = e.target.textContent;
+    //passing target.textContent as an argument because the text content of the clicked pagination button will contain the page number you want to display.
+    showPage(data, e.target.textContent);
+  });
+
 }
 
 // Call functions
