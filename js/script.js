@@ -1,7 +1,6 @@
-/**********************************************
-100DaysOfCode-Challenge: Day 48
-Project 2 - Data Pagination and Filtering - WIP
-**********************************************/
+/****************************************
+Project 2 - Data Pagination and Filtering
+*****************************************/
 
 /*
 Some variables
