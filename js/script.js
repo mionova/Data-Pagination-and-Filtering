@@ -9,7 +9,6 @@ Some variables
 
 const studentList = document.querySelector('.student-list');
 const linkList = document.querySelector('.link-list');
-const buttons = document.getElementsByTagName('button');
 
 /*
 Step 1: Display a page
@@ -48,6 +47,8 @@ Step 2: Display pagination buttons
 */
 
 function addPagination(list) {
+  //A variable to store all pagination buttons
+  const buttons = linkList.getElementsByTagName('button');
   //A variable to store the value of the number of pagination buttons needed if we want to display 9 students on a page
   const numPaginationButtons = Math.ceil(list.length / 9);
   //remove any pagination buttons that might have previously been displayed
@@ -132,12 +133,17 @@ function searchFunc(userInput) {
   }
 }
 
-//attaching addEventListener to the input box
-search.addEventListener('keyup', () => {
-  search = document.querySelector("#search");
+//attaching addEventListener to the input box (more intuitive UX)
+search.addEventListener('change', () => {
+  const search = document.querySelector("#search");
   searchFunc(search.value);
 });
 
+// // Alternate solution: attaching addEventListener to the input box using 'keyup'
+// search.addEventListener('keyup', () => {
+//   const search = document.querySelector("#search");
+//   searchFunction(search.value);
+// });
 
 const submit = document.querySelector("label button");
 
